@@ -1,6 +1,22 @@
 import UIKit
 
-struct QuizQuestion {
+private struct QuizStepViewModel {
+    let image: UIImage
+    let question: String
+    let questionNumber: String
+}
+
+private struct AnswerResultViewModel {
+    let result: Bool
+}
+
+private struct QuizResultsViewModel {
+    let title: String
+    let text: String
+    let buttonText: String
+}
+
+private struct QuizQuestion {
     let image: String
     let text: String
     let correctAnswer: Bool
@@ -117,7 +133,7 @@ final class MovieQuizViewController: UIViewController {
         if currentQuestionIndex == questions.count - 1 {
             let text = "Ваш результат: \(correctAnswers)/\(questions.count)"
             let result = QuizResultsViewModel(
-                title: "Этот раунд окончен!",
+                title: "Раунд окончен",
                 text: text,
                 buttonText: "Сыграть еще раз")
             

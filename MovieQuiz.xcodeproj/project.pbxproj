@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A9BB88F2B94A9AA00844690 /* QuizStateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BB88E2B94A9AA00844690 /* QuizStateModels.swift */; };
 		8AB072DD2B9492E2000B3C30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AB072DC2B9492E2000B3C30 /* Main.storyboard */; };
 		8AED9CFF2B910BB3007FB7A9 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AED9CFD2B910BB3007FB7A9 /* YS Display-Bold.ttf */; };
 		8AED9D002B910BB3007FB7A9 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AED9CFE2B910BB3007FB7A9 /* YS Display-Medium.ttf */; };
@@ -21,7 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8A9BB88E2B94A9AA00844690 /* QuizStateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStateModels.swift; sourceTree = "<group>"; };
 		8AB072DC2B9492E2000B3C30 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8AED9CFD2B910BB3007FB7A9 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		8AED9CFE2B910BB3007FB7A9 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -50,7 +48,6 @@
 		611342392B701CF6003FC2A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8A9BB88E2B94A9AA00844690 /* QuizStateModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,7 +197,6 @@
 				AD1ABAB62831907B00B3E448 /* MovieQuizViewController.swift in Sources */,
 				AD77F5742857F8810062FB14 /* Date+Extensions.swift in Sources */,
 				AD1ABAB22831907B00B3E448 /* AppDelegate.swift in Sources */,
-				8A9BB88F2B94A9AA00844690 /* QuizStateModels.swift in Sources */,
 				AD1ABAB42831907B00B3E448 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
