@@ -49,6 +49,7 @@ final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageView.layer.cornerRadius = 20
         
         let currentQuestion = questions[currentQuestionIndex]
         let fisrtQuestion = QuizQuestion(
@@ -61,6 +62,11 @@ final class MovieQuizViewController: UIViewController {
     }
     
     // MARK: - Methods
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         
         let currentQuestion = questions[currentQuestionIndex]
@@ -75,6 +81,12 @@ final class MovieQuizViewController: UIViewController {
         let givenAnswer = false
         
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+    }
+    
+    private func enableOrDisableButtonsToggle() {
+        for button in [yesButton, noButton] {
+            button?.isEnabled.toggle()
+        }
     }
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
@@ -121,7 +133,8 @@ final class MovieQuizViewController: UIViewController {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
-        imageView.layer.cornerRadius = 6
+        
+        enableOrDisableButtonsToggle()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.showNextQuestionOrResults()
@@ -129,6 +142,7 @@ final class MovieQuizViewController: UIViewController {
     }
     
     private func showNextQuestionOrResults() {
+        enableOrDisableButtonsToggle()
         
         if currentQuestionIndex == questions.count - 1 {
             let text = "Ваш результат: \(correctAnswers)/\(questions.count)"
