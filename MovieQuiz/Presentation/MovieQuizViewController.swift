@@ -17,6 +17,27 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     
+    func createFile() {
+        print(NSHomeDirectory())
+
+        var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        print(documentsURL)
+
+        let fileName = "text.swift"
+        if #available(iOS 16.0, *) {
+            documentsURL.appending(path: fileName)
+        } else {
+            documentsURL.appendPathComponent(fileName)
+        }
+
+
+        if !FileManager.default.fileExists(atPath: documentsURL.path) {
+            let hello = "Hello world!"
+            let data = hello.data(using: .utf8)
+            FileManager.default.createFile(atPath: documentsURL.path, contents: data)
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +46,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         let questionFactory = QuestionFactory(delegate: self)
         self.questionFactory = questionFactory
         self.questionFactory?.requestNextQuestion()
+        
+        createFile()
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -40,6 +63,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.show(quiz: viewModel)
         }
+    }
+    
+    // MARK: - AlertPresenterDelegate
+    
+    func startOver() {
+        self.currentQuestionIndex = 0
+        self.correctAnswers = 0
+        self.questionFactory?.requestNextQuestion()
     }
     
     // MARK: - Methods
@@ -86,23 +117,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     private func show(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
-            title: result.title,
-            message: result.text,
-            preferredStyle: .alert
-        )
-        
-        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            
-            self.currentQuestionIndex = 0
-            self.correctAnswers = 0
-            
-            questionFactory?.requestNextQuestion()
-        }
-
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        let alertPresenter = AlertPresenter(viewController: self, result: result)
+        alertPresenter.present()
     }
     
     private func showAnswerResult(isCorrect: Bool) {
