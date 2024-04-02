@@ -99,7 +99,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func show(quiz result: QuizResultsViewModel) {
         
-        let alertPresenter = AlertPresenter(viewController: self, result: result)
+        let alertPresenter = ResultAlertPresenter(viewController: self, result: result)
         alertPresenter.present()
     }
     
