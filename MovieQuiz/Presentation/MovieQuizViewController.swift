@@ -16,27 +16,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private let questionsAmount = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
+    private var statisticService: StatisticService?
     
-    func createFile() {
-        print(NSHomeDirectory())
-
-        var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        print(documentsURL)
-
-        let fileName = "text.swift"
-        if #available(iOS 16.0, *) {
-            documentsURL.appending(path: fileName)
-        } else {
-            documentsURL.appendPathComponent(fileName)
-        }
-
-
-        if !FileManager.default.fileExists(atPath: documentsURL.path) {
-            let hello = "Hello world!"
-            let data = hello.data(using: .utf8)
-            FileManager.default.createFile(atPath: documentsURL.path, contents: data)
-        }
-    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,7 +28,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         self.questionFactory = questionFactory
         self.questionFactory?.requestNextQuestion()
         
-        createFile()
+        statisticService = StatisticServiceImplementation()
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -117,6 +98,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     private func show(quiz result: QuizResultsViewModel) {
+        
         let alertPresenter = AlertPresenter(viewController: self, result: result)
         alertPresenter.present()
     }
@@ -141,9 +123,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         enableOrDisableButtonsToggle()
         
         if currentQuestionIndex == questionsAmount - 1 {
-            let text = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
+            statisticService?.store(correct: correctAnswers, total: questionsAmount)
+
+            guard let statistic = statisticService else { return }
+            
+            let text = "Ваш результат: \(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов: \(statistic.gamesCount)\nРекорд: \(statistic.bestGame.correct)/\(statistic.bestGame.total) (\(statistic.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statistic.totalAccuracy))%"
+            
             let result = QuizResultsViewModel(
-                title: "Раунд окончен",
+                title: "Этот раунд окончен!",
                 text: text,
                 buttonText: "Сыграть еще раз")
             
