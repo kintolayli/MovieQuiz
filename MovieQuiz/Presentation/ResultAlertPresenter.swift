@@ -13,14 +13,14 @@ class ResultAlertPresenter {
     var alertModel: AlertModel
     var viewController: MovieQuizViewController
 
-    init(viewController: MovieQuizViewController, result: QuizResultsViewModel) {
+    init(viewController: MovieQuizViewController, result: QuizResultsViewModel, completion: @escaping () -> Void) {
         self.viewController = viewController
         
         self.alertModel = AlertModel (
             title: result.title,
             message: result.text,
             buttonText: result.buttonText,
-            completion: {}
+            completion: completion
         )
     }
     
@@ -32,8 +32,8 @@ class ResultAlertPresenter {
             preferredStyle: .alert
         )
         
-        let action = UIAlertAction(title: self.alertModel.buttonText, style: .default) { _ in
-            self.viewController.startOver()
+        let action = UIAlertAction(title: self.alertModel.buttonText, style: .default) { [ weak self ] _ in
+            self?.alertModel.completion()
         }
         
         alert.addAction(action)

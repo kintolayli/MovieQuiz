@@ -48,10 +48,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     // MARK: - AlertPresenterDelegate
     
-    func startOver() {
-        self.currentQuestionIndex = 0
-        self.correctAnswers = 0
-        self.questionFactory?.requestNextQuestion()
+    private func startOver() {
+        currentQuestionIndex = 0
+        correctAnswers = 0
+        questionFactory?.requestNextQuestion()
     }
     
     // MARK: - Methods
@@ -99,7 +99,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func show(quiz result: QuizResultsViewModel) {
         
-        let alertPresenter = ResultAlertPresenter(viewController: self, result: result)
+        let alertPresenter = ResultAlertPresenter(viewController: self, result: result, completion: startOver)
         alertPresenter.present()
     }
     
@@ -127,7 +127,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
 
             guard let statistic = statisticService else { return }
             
-            let text = "Ваш результат: \(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов: \(statistic.gamesCount)\nРекорд: \(statistic.bestGame.correct)/\(statistic.bestGame.total) (\(statistic.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statistic.totalAccuracy))%"
+            let text = """
+            Ваш результат: \(correctAnswers)/\(questionsAmount)
+            Количество сыгранных квизов: \(statistic.gamesCount)
+            Рекорд: \(statistic.bestGame.correct)/\(statistic.bestGame.total) (\(statistic.bestGame.date.dateTimeString))
+            Средняя точность: \(String(format: "%.2f", statistic.totalAccuracy))%
+            """
             
             let result = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
