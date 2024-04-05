@@ -18,6 +18,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var currentQuestion: QuizQuestion?
     private var statisticService: StatisticService?
     
+    private lazy var alertPresenter = ResultAlertPresenter(
+        viewController: self,
+        completion: startOver)
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -99,7 +103,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func show(quiz result: QuizResultsViewModel) {
         
-        let alertPresenter = ResultAlertPresenter(viewController: self, result: result, completion: startOver)
+        alertPresenter.result = result
         alertPresenter.present()
     }
     

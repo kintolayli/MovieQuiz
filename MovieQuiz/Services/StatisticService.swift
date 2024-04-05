@@ -101,7 +101,4 @@ final class StatisticServiceImplementation: StatisticService {
             self.bestGame = newGame
         }
     }
-    
-    
 }
-

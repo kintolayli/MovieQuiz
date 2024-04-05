@@ -10,21 +10,27 @@ import UIKit
 
 class ResultAlertPresenter {
     
-    var alertModel: AlertModel
+    var result: QuizResultsViewModel?
     var viewController: MovieQuizViewController
+    var completion: () -> Void
+    var alertModel: AlertModel?
 
-    init(viewController: MovieQuizViewController, result: QuizResultsViewModel, completion: @escaping () -> Void) {
+    init(viewController: MovieQuizViewController, completion: @escaping () -> Void) {
         self.viewController = viewController
+        self.completion = completion
+    }
+    
+    func present() {
+        guard let result = self.result else { return }
         
         self.alertModel = AlertModel (
             title: result.title,
             message: result.text,
             buttonText: result.buttonText,
-            completion: completion
+            completion: self.completion
         )
-    }
-    
-    func present() {
+        
+        guard let alertModel = self.alertModel else { return }
         
         let alert = UIAlertController(
             title: alertModel.title,
@@ -32,8 +38,8 @@ class ResultAlertPresenter {
             preferredStyle: .alert
         )
         
-        let action = UIAlertAction(title: self.alertModel.buttonText, style: .default) { [ weak self ] _ in
-            self?.alertModel.completion()
+        let action = UIAlertAction(title: self.alertModel?.buttonText, style: .default) { [ weak self ] _ in
+            self?.alertModel?.completion()
         }
         
         alert.addAction(action)
