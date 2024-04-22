@@ -36,6 +36,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func showLoadingIndicator() {
         self.activityIndicator.isHidden = false
+        self.activityIndicator.style = .large
         self.activityIndicator.startAnimating()
     }
     
@@ -159,6 +160,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
         
         enableOrDisableButtonsToggle()
+        showLoadingIndicator()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [ weak self ] in
             guard let self = self else { return }
@@ -168,6 +170,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func showNextQuestionOrResults() {
         enableOrDisableButtonsToggle()
+        hideLoadingIndicator()
         
         if currentQuestionIndex == questionsAmount - 1 {
             statisticService?.store(correct: correctAnswers, total: questionsAmount)
