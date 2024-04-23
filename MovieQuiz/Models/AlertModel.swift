@@ -9,6 +9,7 @@ import UIKit
 
 
 struct AlertModel {
+    let accessibilityId: String
     let title: String
     let message: String
     let buttonText: String

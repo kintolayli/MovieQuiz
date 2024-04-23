@@ -49,7 +49,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         hideLoadingIndicator()
         
         let model = AlertModel(
-            title: "Ошибка",
+            accessibilityId: "ErrorAlert", title: "Ошибка",
             message: message, buttonText: "Попробовать еще раз") { [ weak self ] in
                 guard let self = self else { return }
                 
@@ -143,7 +143,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func show(quiz result: QuizResultsViewModel) {
         
-        let model = AlertModel(title: result.title,
+        let model = AlertModel(accessibilityId: "EndGameAlert",
+                               title: result.title,
                                message: result.text,
                                buttonText: result.buttonText,
                                completion: startOver)
