@@ -25,6 +25,8 @@ class ResultAlertPresenter {
             preferredStyle: .alert
         )
         
+        alert.view.accessibilityIdentifier = model.accessibilityId
+        
         let action = UIAlertAction(title: model.buttonText, style: .default) { _ in
             model.completion()
         }
