@@ -1,7 +1,7 @@
 import UIKit
 
 
-final class MovieQuizViewController: UIViewController {
+final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
     
     // MARK: - variables
     
@@ -13,8 +13,6 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     
     private var presenter: MovieQuizPresenter!
-    private var questionFactory: QuestionFactoryProtocol?
-    var statisticService: StatisticService?
     private lazy var alertPresenter = ResultAlertPresenter(
         viewController: self
     )
@@ -27,8 +25,9 @@ final class MovieQuizViewController: UIViewController {
         presenter = MovieQuizPresenter(viewController: self)
         
         imageView.layer.cornerRadius = 20
-        statisticService = StatisticServiceImplementation()
     }
+    
+    // MARK: - Actions
     
     func showLoadingIndicator() {
         self.activityIndicator.isHidden = false
@@ -50,8 +49,6 @@ final class MovieQuizViewController: UIViewController {
                 guard let self = self else { return }
                 
                 presenter.restartGame()
-                
-                questionFactory?.loadData()
             }
         
         alertPresenter.show(in: self, model: model)
@@ -96,19 +93,9 @@ final class MovieQuizViewController: UIViewController {
         alertPresenter.show(in: self, model: model)
     }
     
-    func showAnswerResult(isCorrect: Bool) {
-        presenter.didAnswer(isCorrectAnswer: isCorrect)
-        
+    func highlightImageBorder(isCorrectAnswer: Bool) {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
-        imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
-        
-        enableOrDisableButtonsToggle()
-        showLoadingIndicator()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [ weak self ] in
-            guard let self = self else { return }
-            self.presenter.showNextQuestionOrResults()
-        }
+        imageView.layer.borderColor = isCorrectAnswer ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
     }
 }

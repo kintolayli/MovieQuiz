@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8A239F392BD86A3500AF535C /* MovieQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239F382BD86A3500AF535C /* MovieQuizPresenter.swift */; };
+		8A239F3B2BD88C4B00AF535C /* MovieQuizViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239F3A2BD88C4B00AF535C /* MovieQuizViewControllerProtocol.swift */; };
+		8A239F3D2BD88CAC00AF535C /* MovieQuizPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239F3C2BD88CAC00AF535C /* MovieQuizPresenterTests.swift */; };
+		8A239F3F2BD890D100AF535C /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A239F3E2BD890D100AF535C /* ArrayTests.swift */; };
 		8A9A5F642BB0DA2E00BD7ED2 /* QuestionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9A5F632BB0DA2E00BD7ED2 /* QuestionFactory.swift */; };
 		8A9A5F672BB0DD4000BD7ED2 /* QuizStepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9A5F662BB0DD4000BD7ED2 /* QuizStepViewModel.swift */; };
 		8A9A5F692BB0DD4B00BD7ED2 /* QuizResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9A5F682BB0DD4B00BD7ED2 /* QuizResultsViewModel.swift */; };
@@ -54,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		8A239F382BD86A3500AF535C /* MovieQuizPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizPresenter.swift; sourceTree = "<group>"; };
+		8A239F3A2BD88C4B00AF535C /* MovieQuizViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizViewControllerProtocol.swift; sourceTree = "<group>"; };
+		8A239F3C2BD88CAC00AF535C /* MovieQuizPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizPresenterTests.swift; sourceTree = "<group>"; };
+		8A239F3E2BD890D100AF535C /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		8A9A5F632BB0DA2E00BD7ED2 /* QuestionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFactory.swift; sourceTree = "<group>"; };
 		8A9A5F662BB0DD4000BD7ED2 /* QuizStepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStepViewModel.swift; sourceTree = "<group>"; };
 		8A9A5F682BB0DD4B00BD7ED2 /* QuizResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsViewModel.swift; sourceTree = "<group>"; };
@@ -139,7 +145,9 @@
 		8AFDA5A02BD70274009FF817 /* MovieQuizTests */ = {
 			isa = PBXGroup;
 			children = (
+				8A239F3E2BD890D100AF535C /* ArrayTests.swift */,
 				8AFDA5AA2BD70816009FF817 /* MoviesLoaderTests.swift */,
+				8A239F3C2BD88CAC00AF535C /* MovieQuizPresenterTests.swift */,
 			);
 			path = MovieQuizTests;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 				8AE80CD72BB8CE470020A8F4 /* ResultAlertPresenter.swift */,
 				8AB072DC2B9492E2000B3C30 /* Main.storyboard */,
 				8A239F382BD86A3500AF535C /* MovieQuizPresenter.swift */,
+				8A239F3A2BD88C4B00AF535C /* MovieQuizViewControllerProtocol.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -352,6 +361,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A239F3F2BD890D100AF535C /* ArrayTests.swift in Sources */,
+				8A239F3D2BD88CAC00AF535C /* MovieQuizPresenterTests.swift in Sources */,
 				8AFDA5AB2BD70816009FF817 /* MoviesLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +385,7 @@
 				AD77F5742857F8810062FB14 /* Date+Extensions.swift in Sources */,
 				8AE80CD62BB8CDBC0020A8F4 /* AlertModel.swift in Sources */,
 				8AE80CD42BB8BECA0020A8F4 /* QuestionFactoryDelegate.swift in Sources */,
+				8A239F3B2BD88C4B00AF535C /* MovieQuizViewControllerProtocol.swift in Sources */,
 				AD1ABAB22831907B00B3E448 /* AppDelegate.swift in Sources */,
 				8AFDA5872BCDE733009FF817 /* NetworkClient.swift in Sources */,
 				8AE80CD82BB8CE470020A8F4 /* ResultAlertPresenter.swift in Sources */,
